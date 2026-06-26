@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand OS — Ina Spuling · Impact von Ina</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── CLIENT COLORS: Navy #1A1A2E + Gold #C9A96E ───────────── */
+:root {
+  --primary:        #C9A96E;   /* Gold */
+  --primary-dark:   #A8893A;
+  --primary-light:  #DFC48A;
+  --primary-rgb:    201, 169, 110;
+  --navy:           #1A1A2E;
+  --navy-mid:       #252540;
+  --navy-light:     #2E2E50;
+
+  --bg-page:        #0D0D1A;
+  --bg-card:        #131325;
+  --bg-card-2:      #1A1A2E;
+  --bg-card-3:      #1F1F38;
+  --border:         rgba(201,169,110,0.12);
+  --border-bright:  rgba(201,169,110,0.25);
+
+  --text-primary:   #FFFFFF;
+  --text-secondary: rgba(255,255,255,0.65);
+  --text-muted:     rgba(255,255,255,0.35);
+
+  --r-sm:    8px;
+  --r-md:    16px;
+  --r-lg:    24px;
+  --r-pill:  9999px;
+
+  --shadow-card:    0 4px 24px rgba(0,0,0,0.5);
+  --shadow-glow:    0 0 40px rgba(201,169,110,0.18);
+  --shadow-primary: 0 8px 32px rgba(201,169,110,0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.site-header {
+  background: linear-gradient(135deg, #0D0D1A 0%, #1A1A2E 60%, #252540 100%);
+  border-bottom: 1px solid var(--border-bright);
+  padding: 40px 32px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 0%, rgba(201,169,110,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.brand-pill {
+  display: inline-block;
+  background: rgba(201,169,110,0.12);
+  border: 1px solid rgba(201,169,110,0.3);
+  color: var(--primary);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: var(--r-pill);
+  margin-bottom: 20px;
+}
+
+.site-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.site-header h1 span { color: var(--primary); }
+
+.site-header .subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.site-header .tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* ── TAB NAV ──────────────────────────────────────────────── */
+.tab-nav {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tab-nav-inner {
+  display: flex;
+  overflow-x: auto;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  scrollbar-width: none;
+}
+
+.tab-nav-inner::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-muted);
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tab-btn:hover { color: var(--text-secondary); }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+/* ── CONTENT AREA ────────────────────────────────────────── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* ── SECTION HEADING ────────────────────────────────────── */
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.section-intro {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+  letter-spacing: 0.5px;
+}
+
+/* ── BLOCK LABEL ─────────────────────────────────────────── */
+.block-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin: 36px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.block-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── CARD ────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.card-featured {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  border-color: var(--border-bright);
+  box-shadow: var(--shadow-glow);
+}
+
+.card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.card h4 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.card p { color: var(--text-secondary); font-size: 14px; line-height: 1.75; }
+
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 8px;
+}
+
+.card ul li {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 4px 0 4px 16px;
+  position: relative;
+  line-height: 1.65;
+}
+
+.card ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-size: 11px;
+}
+
+/* ── TABLE ───────────────────────────────────────────────── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.data-table th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--primary);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-bright);
+}
+
+.data-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.data-table td:first-child {
+  color: var(--text-primary);
+  font-weight: 600;
+  white-space: nowrap;
+  width: 200px;
+}
+
+.data-table tr:last-child td { border-bottom: none; }
+
+/* ── GRID ────────────────────────────────────────────────── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* ── QUOTE ───────────────────────────────────────────────── */
+.quote-block {
+  border-left: 3px solid var(--primary);
+  padding: 12px 20px;
+  margin: 16px 0;
+  background: rgba(201,169,110,0.05);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── PILL TAG ────────────────────────────────────────────── */
+.pill {
+  display: inline-block;
+  background: rgba(201,169,110,0.1);
+  border: 1px solid rgba(201,169,110,0.25);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: var(--r-pill);
+  margin: 3px 3px 3px 0;
+}
+
+/* ── HOOK GRID ───────────────────────────────────────────── */
+.hooks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.hook-item {
+  background: var(--bg-card-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.hook-item .hook-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+/* ── COLOR SWATCH ───────────────────────────────────────── */
+.swatch-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.swatch-block {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.swatch-label { font-size: 11px; color: var(--text-muted); text-align: center; }
+.swatch-hex { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--primary); }
+
+/* ── STEP FLOW ───────────────────────────────────────────── */
+.step-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0;
+  position: relative;
+}
+
+.step {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 20px;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: rgba(201,169,110,0.15);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.step h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.step p { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+
+/* ── DO/DONT ────────────────────────────────────────────── */
+.do-dont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.do-side { border-color: rgba(34,197,94,0.2); }
+.dont-side { border-color: rgba(239,68,68,0.2); }
+
+.do-side h4 { color: #22C55E; }
+.dont-side h4 { color: #EF4444; }
+
+.do-side li::before { color: #22C55E; content: '✓'; }
+.dont-side li::before { color: #EF4444; content: '✗'; }
+
+/* ── PERSONA CARD ───────────────────────────────────────── */
+.persona-card {
+  background: linear-gradient(135deg, #1A1A2E 0%, #252540 100%);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-glow);
+}
+
+.persona-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.persona-title {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.persona-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* ── VILLAIN CARD ────────────────────────────────────────── */
+.villain-statement {
+  background: rgba(201,169,110,0.05);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--r-md);
+  padding: 20px 24px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin: 16px 0;
+}
+
+/* ── FOOTER ─────────────────────────────────────────────── */
+footer {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--primary); }
+.footer-by { font-size: 12px; color: var(--text-muted); }
+.footer-meta { font-size: 11px; color: var(--text-muted); font-family: 'DM Mono', monospace; }
+
+@media (max-width: 600px) {
+  .do-dont { grid-template-columns: 1fr; }
+  .data-table td:first-child { white-space: normal; width: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="brand-pill">Purely Personal · by Daniel Paul</div>
+  <h1>Ina Spuling · <span>Impact von Ina</span></h1>
+  <div class="subtitle">Business Authority Foundation · June 2026</div>
+  <div class="tagline">The Corporate Insider.</div>
+</header>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="showTab('icp',this)">ICP</button>
+    <button class="tab-btn" onclick="showTab('messaging',this)">Messaging House</button>
+    <button class="tab-btn" onclick="showTab('rule1',this)">Rule of 1</button>
+    <button class="tab-btn" onclick="showTab('positioning',this)">Positioning</button>
+    <button class="tab-btn" onclick="showTab('inbox',this)">Business Inbox</button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TAB 1: ICP -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div id="icp" class="tab-panel active">
+<div class="content">
+  <div class="section-title">Ideal Customer Profile</div>
+  <div class="section-intro">Who Ina does her best work with — and why.</div>
+
+  <div class="block-label">Business Snapshot</div>
+  <div class="card">
+    <table class="data-table">
+      <tr><td>Brand</td><td>Impact von Ina</td></tr>
+      <tr><td>Role/Title</td><td>Executive Career Coach · Corporate Insider · Interim HR Authority</td></tr>
+      <tr><td>Niche</td><td>Career Coaching + Leadership Advisory with Corporate Insider Access</td></tr>
+      <tr><td>Who They Serve</td><td>High performers who've achieved a lot — and don't know where to go next</td></tr>
+      <tr><td>Core Offer</td><td>Status analysis → clarity plan → insider execution roadmap</td></tr>
+      <tr><td>Mission</td><td>Help people who've proven they can do the work finally decide what work they actually want to do — and go get it.</td></tr>
+      <tr><td>Primary Outcome</td><td>Ownership of their next move, with the insider knowledge to land it</td></tr>
+    </table>
+  </div>
+
+  <div class="block-label">Ideal Client Profile</div>
+  <div class="card">
+    <table class="data-table">
+      <tr><td>Who They Are</td><td>Experienced professionals and experts — the ones who've already "made it" by most external standards but feel stuck, burned out, or directionless</td></tr>
+      <tr><td>Career Stage</td><td>Mid-to-senior: typically 10–20+ years in, often in leadership or deep expertise roles</td></tr>
+      <tr><td>Decision Maker</td><td>Individual — self-funding, not employer-sponsored; actively choosing to invest in themselves</td></tr>
+      <tr><td>Geography</td><td>German-speaking markets (DACH), internationally mobile</td></tr>
+      <tr><td>Budget Range</td><td>€400–500/hr (1:1); €2,000–2,500 (group program); self-funded</td></tr>
+      <tr><td>Where They Are</td><td>LinkedIn, corporate environments</td></tr>
+    </table>
+  </div>
+
+  <div class="block-label">The Core Problems</div>
+  <div class="grid-3">
+    <div class="card">
+      <h4>Problem 1</h4>
+      <p>"I've achieved a lot — but I don't know what comes next. And I don't even know what I want anymore."</p>
+    </div>
+    <div class="card">
+      <h4>Problem 2</h4>
+      <p>"I'm so overworked and frustrated that I can't even look left or right. My head isn't free to think about something new."</p>
+    </div>
+    <div class="card">
+      <h4>Problem 3</h4>
+      <p>"I want to become a leader / go freelance / switch departments — but I don't actually know what that means from the inside."</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h4>Why They Haven't Fixed It Yet</h4>
+    <p>They've tried career books, workshops, generic coaching, online courses — and found that none of it translates to how companies actually work. The coaches didn't know what really happens behind closed doors. The books were theory. AI-written applications got nowhere. What they were missing is someone who has been inside, who knows how decisions really get made, and who can tell them the truth — fast.</p>
+  </div>
+
+  <div class="block-label">What They Want Instead</div>
+  <div class="grid-3">
+    <div class="card">
+      <h4>Tangible</h4>
+      <p>A concrete next move — job offer, promotion, freelance launch, business founded — with a plan that actually works in the real world.</p>
+    </div>
+    <div class="card">
+      <h4>Emotional</h4>
+      <p>The relief of finally having a clear head. The confidence to make a decision and commit to it. Being back in the driver's seat.</p>
+    </div>
+    <div class="card">
+      <h4>Identity</h4>
+      <p>From "high achiever who somehow got stuck" to "person who takes ownership of their own path — no matter what."</p>
+    </div>
+  </div>
+
+  <div class="block-label">What Frustrates Them About Other Options</div>
+  <div class="card">
+    <table class="data-table">
+      <thead><tr><th>Frustration</th><th>Why It Matters</th></tr></thead>
+      <tr><td>Career coaches who've never worked inside a company</td><td>Their advice is second-hand — useless when navigating real office politics, promotion conversations, or restructuring</td></tr>
+      <tr><td>Recruiters who "know the market"</td><td>They see hiring from the outside — not what actually drives decisions inside the room</td></tr>
+      <tr><td>Generic frameworks and personality tests</td><td>Don't tell you how to position yourself in a specific culture or how a specific decision really gets made</td></tr>
+      <tr><td>AI-written applications</td><td>Detectable, generic, misaligned — the exact opposite of what stands out</td></tr>
+      <tr><td>Trainers and workshop facilitators</td><td>Can build skill — but can't decode the organisational system the person is actually operating inside</td></tr>
+    </table>
+  </div>
+
+  <div class="block-label">ICP Persona Summary</div>
+  <div class="persona-card">
+    <div class="persona-name">The Stuck High Performer</div>
+    <div class="persona-title">Senior Professional · Self-Funding · DACH Market</div>
+    <p>The ideal client for Impact von Ina is a high-achieving professional — typically mid to senior level — who has spent years delivering results and has quietly stopped knowing what they themselves actually want. They're not failing; they're often performing well. But they feel a creeping sense of being trapped: overworked, under-energised, and unable to imagine a next chapter. They're not whiners looking for someone to blame — they're doers who've temporarily lost direction and want someone to help them find it fast, with real advice that translates to how organisations actually work. They fund this investment themselves, which means they're serious. And they respond to someone who's been inside, who knows the system, and who won't waste their time.</p>
+  </div>
+
+  <div class="block-label">Content Direction</div>
+  <div class="card">
+    <ul>
+      <li><strong>Topics that resonate:</strong> The truth about how promotions actually happen. What corporate culture really means for your career. How to make a decision when you're too tired to think. The difference between the title you want and the job it actually is. Why your last coaching didn't work.</li>
+      <li><strong>Tone that connects:</strong> Direct. Warm. No bullshit. The colleague who's seen it all and will tell you what nobody else will.</li>
+      <li><strong>Proof they need:</strong> Specific examples from real companies and real situations — not anonymised frameworks. Real scenarios. Real outcomes.</li>
+      <li><strong>What to avoid:</strong> "Empower." "Unlock your potential." "Holistic." "Journey." Any language that sounds like a course landing page from 2019.</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TAB 2: MESSAGING HOUSE -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div id="messaging" class="tab-panel">
+<div class="content">
+  <div class="section-title">Messaging House</div>
+  <div class="section-intro">What Ina says, how she says it, and why it lands.</div>
+
+  <div class="block-label">The Central Tension</div>
+  <div class="card card-featured">
+    <p>High performers have been so focused on achieving what was expected of them that they've never stopped to decide what they actually want. Now they're stuck — successful by most measures, directionless by their own. They have the drive, the experience, and the credentials. What they don't have is someone who can tell them the truth about how the system works and help them move through it faster.</p>
+    <div class="quote-block" style="margin-top:16px;">"Ein Personaler, der ist drin. Der wird mit dem Problem konfrontiert."</div>
+  </div>
+
+  <div class="block-label">Unique Value Proposition</div>
+  <div class="grid-3">
+    <div class="card">
+      <h4>Short · 12 words</h4>
+      <p style="color:#fff; font-size:16px; font-family:'Cormorant Garamond',serif; font-style:italic;">Career clarity and a real plan — from someone who's been inside.</p>
+    </div>
+    <div class="card">
+      <h4>Medium · 30 words</h4>
+      <p>Ina Spuling combines 22+ years of corporate HR leadership with executive coaching to help high performers cut through the noise, understand how the system actually works, and make their next move with confidence.</p>
+    </div>
+    <div class="card">
+      <h4>Long · 65 words</h4>
+      <p>Most career coaches give you frameworks. Ina gives you the truth. After 22+ years inside companies of every size — advising leaders, shaping cultures, watching decisions get made — she knows what actually moves the needle for people who've already proved themselves. She works with high performers who are stuck, burned out, or unsure of what's next, and gets them to a clear decision and a working plan — fast, practical, and no nonsense.</p>
+    </div>
+  </div>
+
+  <div class="block-label">Messaging Pillars</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>"The people who advise you on corporate life should have actually lived it."</h3>
+      <h4>Why it matters</h4>
+      <p>The client's core frustration is advice that doesn't translate to reality. Theory that didn't work in their actual company, with their actual boss.</p>
+      <div class="quote-block">"Ein Personaler, der ist drin."</div>
+    </div>
+    <div class="card">
+      <h3>"You're not stuck because you're not capable. You're stuck because nobody showed you how it really works."</h3>
+      <h4>Why it matters</h4>
+      <p>Removes self-blame. Reframes stuckness from personal failure to system opacity — which Ina can decode.</p>
+      <div class="quote-block">"Das liegt nicht an ihnen, sondern an den Mechanismen."</div>
+    </div>
+    <div class="card">
+      <h3>"If you want to move, you have to take responsibility for the move."</h3>
+      <h4>Why it matters</h4>
+      <p>Self-selecting filter. Ina works with people who have the will to act — not people waiting for someone else to fix it.</p>
+      <div class="quote-block">"Wenn ich was erreichen will, muss ich es selbst in die Hand nehmen."</div>
+    </div>
+    <div class="card">
+      <h3>"Speed matters. Clarity shouldn't take years."</h3>
+      <h4>Why it matters</h4>
+      <p>Her clients are busy, tired, and want results. 22+ years of pattern recognition enables faster insight.</p>
+      <div class="quote-block">"Ich kann den Shortcut bieten."</div>
+    </div>
+  </div>
+
+  <div class="block-label">Emotional Landscape</div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>What Drives Them to Act</h4>
+      <ul>
+        <li><strong>Identity:</strong> "I want to be seen as someone who decides their own path."</li>
+        <li><strong>Achievement:</strong> "I want to finally do the thing I know I'm capable of."</li>
+        <li><strong>Relief:</strong> "I want to stop carrying this feeling that something is wrong."</li>
+        <li><strong>Connection:</strong> "I want to feel like myself again."</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>What Blocks Them</h4>
+      <ul>
+        <li><strong>Fear:</strong> "What if I make the wrong decision again?"</li>
+        <li><strong>Resource:</strong> "I can't afford to invest right now" → they're not sure it will work</li>
+        <li><strong>Belief:</strong> "At this stage you can't really change direction"</li>
+        <li><strong>Timing:</strong> "Let me just get through this quarter" — for three years</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="block-label">Brand Voice</div>
+  <div class="card">
+    <table class="data-table">
+      <thead><tr><th>Attribute</th><th>In Practice</th><th>Do</th><th>Don't</th></tr></thead>
+      <tr><td>Direct</td><td>Says the thing plainly</td><td>"Here's what's actually happening."</td><td>"Well, there are many perspectives..."</td></tr>
+      <tr><td>Warm</td><td>Genuine care, not process</td><td>Make them feel seen before challenging them</td><td>Clinical or transactional even when sharp</td></tr>
+      <tr><td>Insider</td><td>Speaks from inside experience</td><td>Specific corporate situations, named patterns</td><td>Theory or frameworks alone</td></tr>
+      <tr><td>No-nonsense</td><td>Cuts what doesn't serve</td><td>Short, specific, actionable</td><td>Long wind-ups, excessive caveating</td></tr>
+      <tr><td>Umsetzungsstark</td><td>Oriented toward action</td><td>End every conversation with something concrete</td><td>Open-ended or purely philosophical</td></tr>
+    </table>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Words to Use</h4>
+      <div style="margin-top:8px;">
+        <span class="pill">Klarheit</span><span class="pill">Verantwortung</span><span class="pill">Insider-Know-how</span><span class="pill">Mechanismen</span><span class="pill">Shortcut</span><span class="pill">Macher</span><span class="pill">Pragmatisch</span><span class="pill">Resultate</span><span class="pill">Konkret</span><span class="pill">Durchsetzung</span><span class="pill">Ehrlich</span><span class="pill">Schnell</span><span class="pill">Praktisch</span>
+      </div>
+    </div>
+    <div class="card">
+      <h4>Words to Avoid</h4>
+      <div style="margin-top:8px;">
+        <span class="pill" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.25); color:#EF4444;">Transformation</span><span class="pill" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.25); color:#EF4444;">Journey</span><span class="pill" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.25); color:#EF4444;">Empower</span><span class="pill" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.25); color:#EF4444;">Unlock</span><span class="pill" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.25); color:#EF4444;">Holistic</span><span class="pill" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.25); color:#EF4444;">Synergy</span><span class="pill" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.25); color:#EF4444;">Auf Augenhöhe</span><span class="pill" style="background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.25); color:#EF4444;">Potenzial entfalten</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TAB 3: RULE OF 1 -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div id="rule1" class="tab-panel">
+<div class="content">
+  <div class="section-title">Rule of 1</div>
+  <div class="section-intro">One avatar. One problem. One solution. One outcome.</div>
+
+  <div class="block-label">The One Focus</div>
+  <div class="grid-2">
+    <div class="card card-featured">
+      <h4>One Avatar</h4>
+      <p style="color:#fff; font-size:16px; font-family:'Cormorant Garamond',serif;">Marcus — the senior expert who built everything he was supposed to, and now doesn't know what he actually wants.</p>
+    </div>
+    <div class="card card-featured">
+      <h4>One Problem</h4>
+      <p style="color:#fff; font-size:16px; font-family:'Cormorant Garamond',serif;">A career built on expectations rather than choice — now running out of runway and momentum.</p>
+    </div>
+    <div class="card card-featured">
+      <h4>One Solution</h4>
+      <p style="color:#fff; font-size:16px; font-family:'Cormorant Garamond',serif;">Surface → Decode → Move</p>
+    </div>
+    <div class="card card-featured">
+      <h4>One Outcome</h4>
+      <p style="color:#fff; font-size:16px; font-family:'Cormorant Garamond',serif;">They own their next chapter — and they know how to execute it.</p>
+    </div>
+  </div>
+
+  <div class="block-label">One Avatar: Marcus</div>
+  <div class="persona-card">
+    <div class="persona-name">Marcus</div>
+    <div class="persona-title">Senior Expert · 42 · 20 Years In · Privately Stuck</div>
+    <p>Marcus is 42. He's been good at his job for twenty years. He's delivered — consistently, reliably, sometimes brilliantly. From the outside, everything looks fine. He's earning well. He has respect. But privately, something has gone quiet. The ambition that used to pull him forward is still there — he can feel it — but it has nowhere to go. He's overworked. He's stopped looking up. He tells himself he'll think about what's next "when things calm down." They don't calm down.</p>
+    <div class="quote-block" style="margin-top:20px;">"I've done everything right. So why does this feel so wrong? Is this it? I'm not the kind of person who just accepts that. But I don't know where to go from here. And I'm too tired to even look properly."</div>
+  </div>
+
+  <div class="block-label">The Villain</div>
+  <div class="grid-3">
+    <div class="card">
+      <h4>External</h4>
+      <p>A career built on other people's expectations, in a system whose rules were never explained, reaching a point where the next step is genuinely unclear.</p>
+    </div>
+    <div class="card">
+      <h4>Internal</h4>
+      <p>The exhaustion of performing without direction. The creeping feeling that time is passing and something is being wasted.</p>
+    </div>
+    <div class="card">
+      <h4>Philosophical</h4>
+      <p>Someone who has spent twenty years building real expertise shouldn't have to navigate their next career decision completely blind.</p>
+    </div>
+  </div>
+  <div class="villain-statement">"The real problem in Marcus's story is a corporate system that rewards performance but teaches nothing about how decisions actually get made — which shows up as being qualified and stuck at the same time, makes him feel like the problem is him when it isn't, and represents the unfair truth that the people who've contributed the most are often the least equipped to navigate their own next chapter."</div>
+
+  <div class="block-label">One Solution: 3-Step Plan</div>
+  <div class="step-flow">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>Surface</h4>
+      <p>A real conversation — not a questionnaire. Ina digs into what they've actually built, what they've actually loved, and what's actually in the way. Output: clarity on what they want, not what they think they should want.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>Decode</h4>
+      <p>Insider access: how the decision they want to make actually works inside the system. What "becoming a leader" looks like day-to-day. How a promotion really gets made. Where the real leverage is. The shortcuts that most people never find.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>Move</h4>
+      <p>The actual plan — the application, the positioning, the approach, the conversation, the timing. Executed now, not eventually. With accountability until the decision is made and landed.</p>
+    </div>
+  </div>
+
+  <div class="block-label">14 Hooks</div>
+  <div class="block-label" style="margin-top:16px; color: #22C55E;">Positive — Paint the Win</div>
+  <div class="hooks-grid">
+    <div class="hook-item"><div class="hook-num">Hook 01</div>You don't need more ambition. You need someone who can show you how the system actually works.</div>
+    <div class="hook-item"><div class="hook-num">Hook 02</div>What if your next career chapter was the most interesting one — and you haven't started it yet?</div>
+    <div class="hook-item"><div class="hook-num">Hook 03</div>The moment you stop waiting to feel ready is the moment things start moving.</div>
+    <div class="hook-item"><div class="hook-num">Hook 04</div>Your 20 years of experience are worth more than you think. You just need someone who can read them clearly.</div>
+    <div class="hook-item"><div class="hook-num">Hook 05</div>There is a shortcut. It's called working with someone who's already been inside.</div>
+    <div class="hook-item"><div class="hook-num">Hook 06</div>Over 1,000 people coached — from inside the companies making the decisions. That's a different kind of advice.</div>
+    <div class="hook-item"><div class="hook-num">Hook 07</div>The version of you that's competent, clear, and moving again — is not far from where you are now.</div>
+  </div>
+  <div class="block-label" style="color: #EF4444;">Negative — Call Out the Pain</div>
+  <div class="hooks-grid">
+    <div class="hook-item"><div class="hook-num">Hook 08</div>The people advising you on your corporate career have mostly never worked inside one.</div>
+    <div class="hook-item"><div class="hook-num">Hook 09</div>Your company is not responsible for your development. The sooner you accept that, the faster you move.</div>
+    <div class="hook-item"><div class="hook-num">Hook 10</div>You're not stuck because you're not capable. You're stuck because nobody showed you how it really works.</div>
+    <div class="hook-item"><div class="hook-num">Hook 11</div>Every quarter you say "when things calm down" is a quarter you don't get back.</div>
+    <div class="hook-item"><div class="hook-num">Hook 12</div>Generic coaching didn't work because generic advice doesn't apply to your specific company, boss, and situation.</div>
+    <div class="hook-item"><div class="hook-num">Hook 13</div>Career books and personality tests can't tell you why you didn't get that promotion. Someone who's been in that room can.</div>
+    <div class="hook-item"><div class="hook-num">Hook 14</div>You already know something is wrong. You don't need more thinking. You need a plan.</div>
+  </div>
+
+  <div class="block-label">Why / Who / How</div>
+  <div class="grid-3">
+    <div class="card"><h4>Why</h4><p>"We exist because smart, capable people are being failed by advice that was never built for where they actually are — and nobody should have to navigate a complex system completely blind."</p></div>
+    <div class="card"><h4>Who</h4><p>High performers — senior professionals, experts, leaders — who have achieved a lot and no longer know what they want to achieve next, or who know exactly what they want and can't figure out how to get there.</p></div>
+    <div class="card"><h4>How</h4><p>"Unlike generic career coaches who've studied companies from the outside, Ina works from the inside — because she spent 22+ years in the rooms where the decisions get made. The advice is specific, the shortcuts are real, and the plan actually works."</p></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TAB 4: BRAND POSITIONING -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div id="positioning" class="tab-panel">
+<div class="content">
+  <div class="section-title">Brand Positioning</div>
+  <div class="section-intro">What space Impact von Ina owns — and what it must sacrifice to own it.</div>
+
+  <div class="block-label">Category Definition</div>
+  <div class="card card-featured">
+    <div class="grid-2" style="margin-bottom:0;">
+      <div>
+        <h4>You Are Not</h4>
+        <ul>
+          <li>A career coach with a certification and a framework</li>
+          <li>A recruiter who "knows the market"</li>
+          <li>A management consultant restructuring from the outside</li>
+          <li>A trainer delivering day-long skills workshops</li>
+        </ul>
+      </div>
+      <div>
+        <h4>You Operate As</h4>
+        <p style="color:#fff; font-family:'Cormorant Garamond',serif; font-size:18px; font-style:italic; margin-bottom:12px;">The Corporate Insider who translates how organisations actually work — and uses that to help high performers make better, faster, more informed decisions about their own careers.</p>
+        <p><strong>Category shift:</strong> "Career Coaching" → <span style="color:var(--primary);">"Corporate Insider Access for High Performers"</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-label">Positioning Territory</div>
+  <div class="card" style="text-align:center; padding:36px;">
+    <div style="font-family:'Cormorant Garamond',serif; font-size:22px; color:var(--primary); margin-bottom:8px; font-style:italic;">"Ina Spuling is the go-to advisor</div>
+    <div style="font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--text-secondary); margin-bottom:4px;">for high performers who've built something real inside corporate life</div>
+    <div style="font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--text-secondary); margin-bottom:4px;">and now need someone who actually knows how that world works</div>
+    <div style="font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--primary);">to help them decide — and execute — what comes next."</div>
+  </div>
+
+  <div class="block-label">Strategic Anchors</div>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Frame of Reference</h4>
+      <p style="color:#fff; font-size:15px;">Executive Career Advisor with Corporate Insider Access</p>
+    </div>
+    <div class="card">
+      <h4>Point of Difference (POD)</h4>
+      <p>22+ years of direct experience inside organisations as an HR executive — advising leaders, managing restructurings, watching promotions happen — across company sizes from startup to enterprise. Knowledge from inside, not about companies.</p>
+    </div>
+    <div class="card">
+      <h4>Point of Parity (POP)</h4>
+      <p>Coaching methodology, empathy, genuine care, confidentiality, goal clarity, and a working plan.</p>
+    </div>
+    <div class="card">
+      <h4>Strategic Sacrifice</h4>
+      <ul>
+        <li>People without the will to act</li>
+        <li>People not prepared to self-fund the investment</li>
+        <li>Generic "work-life balance" coaching without a concrete next move</li>
+        <li>Corporate L&D delivering programmes to 50 people</li>
+        <li>Ongoing interim management (time-for-money, no exit)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="block-label">Brand Architecture</div>
+  <div class="grid-3">
+    <div class="card">
+      <h4>Brand Promise</h4>
+      <p>"Ina Spuling promises her clients will leave with a concrete next move they chose, a plan they can execute, and the insider knowledge to make it land — faster than they thought possible."</p>
+    </div>
+    <div class="card">
+      <h4>Brand Essence</h4>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:22px; color:var(--primary);">Insider. Direct. Warme Klarheit.</p>
+    </div>
+    <div class="card">
+      <h4>Brand Archetype</h4>
+      <p><strong>The Mentor</strong> — with the credibility of the Sage. Brings both genuine warmth and earned authority. Tells the truth nobody inside the company will say.</p>
+    </div>
+  </div>
+
+  <div class="block-label">Tagline Options</div>
+  <div class="card">
+    <table class="data-table">
+      <thead><tr><th>#</th><th>Category</th><th>Tagline</th></tr></thead>
+      <tr><td>1</td><td>Category-owning</td><td style="color:#fff; font-family:'Cormorant Garamond',serif; font-size:16px;">The Corporate Insider. ⭐ Recommended</td></tr>
+      <tr><td>2</td><td>Category-owning</td><td style="font-family:'Cormorant Garamond',serif; font-size:16px;">Career Clarity. From the Inside.</td></tr>
+      <tr><td>3</td><td>Differentiation-first</td><td style="font-family:'Cormorant Garamond',serif; font-size:16px;">What no career coach will tell you — because they've never been inside.</td></tr>
+      <tr><td>4</td><td>Differentiation-first</td><td style="font-family:'Cormorant Garamond',serif; font-size:16px;">The shortcut is someone who's already been there.</td></tr>
+      <tr><td>5</td><td>Transformation-focused</td><td style="font-family:'Cormorant Garamond',serif; font-size:16px;">From stuck to moving. Faster than you think.</td></tr>
+      <tr><td>6</td><td>Transformation-focused</td><td style="font-family:'Cormorant Garamond',serif; font-size:16px;">Get in. Decide. Move.</td></tr>
+      <tr><td>7</td><td>Transformation-focused</td><td style="font-family:'Cormorant Garamond',serif; font-size:16px;">The next chapter is yours to write.</td></tr>
+    </table>
+    <p style="margin-top:12px; font-size:13px; color:var(--primary);">★ Option 1 recommended — owns the positioning claim in three words, impossible to copy without lying, travels cleanly in both German and English contexts.</p>
+  </div>
+
+  <div class="block-label">Strategic Do's and Don'ts</div>
+  <div class="do-dont">
+    <div class="card do-side">
+      <h4>DO</h4>
+      <ul>
+        <li>Lead with the insider credential in every introduction and headline</li>
+        <li>Use specific corporate situations and real examples as proof</li>
+        <li>Name what doesn't work about other solutions — specifically</li>
+        <li>Show the practical outputs: what does a client actually have after?</li>
+        <li>Speak to the person who funds this themselves — frame as investment in agency</li>
+      </ul>
+    </div>
+    <div class="card dont-side">
+      <h4>DON'T</h4>
+      <ul>
+        <li>Position as another career coach — insider angle always first</li>
+        <li>Use buzzwords from the coaching world you're differentiating from</li>
+        <li>Try to serve everyone — the strategic sacrifice is real</li>
+        <li>Compete on warmth and empathy alone — that's table stakes</li>
+        <li>Sell time as an interim without strategic intent or exit</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="block-label">The Strategic Enemy</div>
+  <div class="villain-statement">"Ina Spuling's true opponent is the belief that your career path is something that happens to you — not the recruiter who didn't call back, not the colleague who got the promotion, but the quiet acceptance that the system is in charge and you are inside it."</div>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TAB 5: BUSINESS INBOX -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div id="inbox" class="tab-panel">
+<div class="content">
+  <div class="section-title">Business Inbox</div>
+  <div class="section-intro">Factual business data — operational, not strategic.</div>
+
+  <div class="block-label">Business Foundation</div>
+  <div class="card">
+    <table class="data-table">
+      <tr><td>Brand Name</td><td>Impact von Ina</td></tr>
+      <tr><td>What They Do</td><td>Executive career coaching and leadership advisory for senior professionals. Combines 22+ years of first-hand HR executive experience with individual coaching to help high performers make concrete decisions about their next move — and execute them. Also offers corporate advisory for project-based people/HR strategy.</td></tr>
+      <tr><td>Stage</td><td>Building — existing practice, actively pivoting toward coaching/consulting/speaking as primary revenue model</td></tr>
+      <tr><td>Location/Markets</td><td>Germany (DACH primary), internationally mobile; German and English delivery</td></tr>
+      <tr><td>Revenue Streams</td><td>1:1 executive coaching · Group coaching program · Corporate advisory (project-based) · Speaking (building)</td></tr>
+    </table>
+  </div>
+
+  <div class="block-label">Offer Inventory</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3>1:1 Executive Coaching</h3>
+      <table class="data-table" style="margin-top:12px;">
+        <tr><td>What</td><td>Individual coaching combining career strategy, insider corporate knowledge, accountability</td></tr>
+        <tr><td>For</td><td>Senior professionals with a specific high-stakes decision or transition</td></tr>
+        <tr><td>How</td><td>5–6 sessions typical; optional ongoing bi-weekly 30-min accountability</td></tr>
+        <tr><td>Price</td><td>€400–500/hour</td></tr>
+        <tr><td>Status</td><td><span class="pill">Active</span></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Group Coaching Program</h3>
+      <table class="data-table" style="margin-top:12px;">
+        <tr><td>What</td><td>Structured 6-week program for high performers navigating career decisions</td></tr>
+        <tr><td>For</td><td>Senior professionals with a concrete career challenge</td></tr>
+        <tr><td>How</td><td>Bi-weekly group sessions, max 10 participants</td></tr>
+        <tr><td>Price</td><td>€2,000–2,500 per participant</td></tr>
+        <tr><td>Status</td><td><span class="pill" style="background:rgba(245,158,11,0.1); border-color:rgba(245,158,11,0.25); color:#F59E0B;">In Development</span></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Corporate Advisory</h3>
+      <table class="data-table" style="margin-top:12px;">
+        <tr><td>What</td><td>Project-based people/HR strategy — M&A, restructuring, org design, change, leadership development</td></tr>
+        <tr><td>For</td><td>Organisations needing real HR/OD thinking without a large consulting firm</td></tr>
+        <tr><td>How</td><td>Go in, deliver strategy, enable team, exit — not ongoing interim</td></tr>
+        <tr><td>Price</td><td>Project-based · <span style="color:var(--primary);">[Rate TBC]</span></td></tr>
+        <tr><td>Status</td><td><span class="pill">Active — Repositioning</span></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Speaking</h3>
+      <table class="data-table" style="margin-top:12px;">
+        <tr><td>What</td><td>Keynotes and panels on career, leadership, corporate culture, AI + workforce</td></tr>
+        <tr><td>For</td><td>Corporate events, HR conferences, leadership summits</td></tr>
+        <tr><td>How</td><td>Insider perspective with practical takeaways — no theoretical fluff</td></tr>
+        <tr><td>Price</td><td><span style="color:var(--primary);">[Fee TBC]</span></td></tr>
+        <tr><td>Status</td><td><span class="pill" style="background:rgba(245,158,11,0.1); border-color:rgba(245,158,11,0.25); color:#F59E0B;">Building</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="block-label">Proof & Credibility</div>
+  <div class="card">
+    <table class="data-table">
+      <tr><td>Experience</td><td>22+ years in HR and people leadership</td></tr>
+      <tr><td>People Coached</td><td>1,000+</td></tr>
+      <tr><td>Leaders Worked With</td><td>100+</td></tr>
+      <tr><td>Industries</td><td>IT (primary), Cyber Security, multiple sectors from startup to enterprise</td></tr>
+      <tr><td>Levels</td><td>Admin through VP / Interim Head / Director</td></tr>
+      <tr><td>Published</td><td>Quick Guide Zeitgemäßes Personalmanagement · Personalmanagement für Chefs (MVG Verlag, in progress)</td></tr>
+    </table>
+  </div>
+
+  <div class="block-label">Visual Brand Identity</div>
+  <div class="card">
+    <div class="swatch-row">
+      <div class="swatch">
+        <div class="swatch-block" style="background:#1A1A2E;"></div>
+        <div class="swatch-label">Navy</div>
+        <div class="swatch-hex">#1A1A2E</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#C9A96E;"></div>
+        <div class="swatch-label">Gold</div>
+        <div class="swatch-hex">#C9A96E</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-block" style="background:#FFFFFF; border:1px solid #333;"></div>
+        <div class="swatch-label">White</div>
+        <div class="swatch-hex">#FFFFFF</div>
+      </div>
+    </div>
+    <table class="data-table" style="margin-top:20px;">
+      <tr><td>Heading Font</td><td>Cormorant Garamond — authority, warmth, refinement</td></tr>
+      <tr><td>Body Font</td><td>Lato — clean, readable, professional</td></tr>
+      <tr><td>Brand Feel</td><td>Warm-kompetent · humorvoll · umsetzungsstark</td></tr>
+      <tr><td>Visual Translation</td><td>Navy communicates authority without coldness; Gold adds warmth and distinctiveness. Nothing corporate-generic. Nothing coaching-fluffy.</td></tr>
+    </table>
+  </div>
+
+  <div class="block-label">LinkedIn & Content Priorities</div>
+  <div class="card">
+    <table class="data-table">
+      <tr><td>LinkedIn Goal</td><td>Establish as the go-to corporate insider voice for senior professionals in DACH; attract 1:1 coaching clients and corporate advisory conversations; build toward speaking pipeline</td></tr>
+      <tr><td>Current Status</td><td>1,000+ connections · comment/like activity · zero posting history · starting now</td></tr>
+      <tr><td>Content Themes</td><td>How promotions really happen · What career coaches get wrong · The title trap · Taking ownership of your own career · AI and the workforce · Real leadership vs the textbook version</td></tr>
+      <tr><td>Formats</td><td>Text posts (primary) · Comments on others' posts (already active) · Speaking clips (future)</td></tr>
+      <tr><td>Next 3–6 Months</td><td>LinkedIn content engine live · Group program structured and launched · Corporate advisory repositioned to project/advisory · Speaking pipeline started</td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <span class="footer-brand">Purely Personal</span> &nbsp;
+    <span class="footer-by">by Daniel Paul</span>
+  </div>
+  <span class="footer-meta">Business Authority Foundation · Impact von Ina · June 2026</span>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
